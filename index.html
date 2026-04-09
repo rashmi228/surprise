@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Birthday Surprise</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
+text-align:center;
+background:linear-gradient(270deg,#ff758c,#ff7eb3,#ff4d6d,#ff758c);
+background-size:800% 800%;
+animation:bgmove 15s infinite;
+}
+
+@keyframes bgmove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+.container{
+width:90%;
+max-width:420px;
+position:relative;
+}
+
+.hidden{
+display:none;
+}
+
+img{
+max-width:100%;
+border-radius:12px;
+}
+
+.teddy{
+position:absolute;
+left:-80px;
+top:40px;
+width:90px;
+}
+
+.polaroid{
+background:white;
+padding:15px 15px 40px;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+transform:rotate(-3deg);
+}
+
+.caption{
+color:black;
+font-family:'Pacifico',cursive;
+font-size:20px;
+}
+
+.keypad{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+width:220px;
+margin:auto;
+}
+
+.keypad button{
+width:60px;
+height:60px;
+border-radius:50%;
+border:2px solid white;
+background:transparent;
+color:white;
+font-size:20px;
+cursor:pointer;
+}
+
+.dots{
+display:flex;
+justify-content:center;
+gap:10px;
+margin:20px;
+}
+
+.dot{
+width:15px;
+height:15px;
+border:2px solid white;
+border-radius:50%;
+}
+
+.active{
+background:white;
+}
+
+button{
+padding:12px 25px;
+border:none;
+background:white;
+color:#ff4d6d;
+border-radius:30px;
+font-weight:bold;
+cursor:pointer;
+margin-top:20px;
+}
+
+.cakebig{
+font-size:160px;
+animation:cakebounce 2s infinite;
+}
+
+@keyframes cakebounce{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-15px);}
+}
+
+.gifts{
+display:flex;
+justify-content:center;
+gap:25px;
+font-size:70px;
+}
+
+.quote{
+margin-top:20px;
+font-size:18px;
+}
+
+.photos{
+display:flex;
+gap:10px;
+}
+
+.photos img{
+width:48%;
+}
+
+.cake{
+font-size:150px;
+cursor:pointer;
+}
+
+.flame{
+font-size:30px;
+animation:flicker 0.3s infinite alternate;
+}
+
+@keyframes flicker{
+from{opacity:1}
+to{opacity:0.5}
+}
+
+.heart{
+position:absolute;
+color:white;
+font-size:20px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-10vh);}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- PASSCODE PAGE -->
+
+<div id="screen1" class="container">
+
+<img src="teddy.jpg" class="teddy">
+
+<div class="polaroid">
+<img src="image.jpg">
+<div class="caption">A small surprise to YOU 🫂❤️</div>
+</div>
+
+<h3>Enter Passcode</h3>
+
+<div class="dots">
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+</div>
+
+<div class="keypad">
+
+<button onclick="add('1')">1</button> <button onclick="add('2')">2</button> <button onclick="add('3')">3</button>
+
+<button onclick="add('4')">4</button> <button onclick="add('5')">5</button> <button onclick="add('6')">6</button>
+
+<button onclick="add('7')">7</button> <button onclick="add('8')">8</button> <button onclick="add('9')">9</button>
+
+<button onclick="clearCode()">C</button> <button onclick="add('0')">0</button> <button onclick="add('#')">#</button>
+
+</div>
+
+</div>
+
+<!-- ANIMATED CAKE PAGE -->
+
+<div id="screen2" class="container hidden">
+
+<h1 style="font-family:'Pacifico',cursive;">Happy Birthday 🎂</h1>
+
+<div class="cakebig">🎂</div>
+
+<p>Someone made something special for you ❤️</p>
+
+<button onclick="next(3)">NEXT</button>
+
+</div>
+
+<!-- GIFTS PAGE -->
+
+<div id="screen3" class="container hidden">
+
+<h1 style="font-family:'Pacifico',cursive;">Open Your Gifts 🎁</h1>
+
+<div class="gifts">
+<span onclick="showQuote(1)">🎁</span>
+<span onclick="showQuote(2)">🎁</span>
+<span onclick="showQuote(3)">🎁</span>
+</div>
+
+<div id="quote" class="quote"></div>
+
+<button onclick="next(4)">NEXT</button>
+
+</div>
+
+<!-- BLOW CANDLE PAGE -->
+
+<div id="screen4" class="container hidden">
+
+<h1>Blow the Candle 🎂</h1>
+
+<div class="cake" onclick="blow()">🎂</div>
+
+<div id="flame" class="flame">🔥</div>
+
+<p>Tap the cake</p>
+
+</div>
+
+<!-- MEMORIES PAGE -->
+
+<div id="screen5" class="container hidden">
+
+<h2>Our Memories 📸</h2>
+
+<div class="photos">
+<img src="image1.jpg">
+<img src="image2.jpg">
+</div>
+
+<button onclick="next(6)">NEXT</button>
+
+</div>
+
+<!-- REASONS PAGE -->
+
+<div id="screen6" class="container hidden">
+
+<h2>Reasons I Love You ❤️</h2>
+
+<p>• You make me smile everyday</p>
+<p>• You care about me</p>
+<p>• You understand me</p>
+<p>• You make life beautiful</p>
+
+<button onclick="next(7)">NEXT</button>
+
+</div>
+
+<!-- PROMISE PAGE -->
+
+<div id="screen7" class="container hidden">
+
+<h2>My Promises 💍</h2>
+
+<p>• I will always support you</p>
+<p>• I will always stand with you</p>
+<p>• I will care for you forever</p>
+<p>• I will love you always</p>
+
+<button onclick="next(8)">NEXT</button>
+
+</div>
+
+<!-- LETTER PAGE -->
+
+<div id="screen8" class="container hidden">
+
+<h2>My Letter To You 💌</h2>
+
+<p>
+Happy Birthday Cheeku 🎂 <br><br>
+You are the most beautiful part of my life.  
+Every moment with you feels special.  
+Thank you for always being there for me.  
+I feel lucky to have you.  
+<br><br>
+I love you so much ❤️
+</p>
+
+</div>
+
+<script>
+
+let code="";
+const pass="2812";
+
+function add(n){
+
+if(code.length<4){
+code+=n;
+updateDots();
+}
+
+if(code.length===4){
+setTimeout(check,300);
+}
+
+}
+
+function updateDots(){
+
+let dots=document.querySelectorAll(".dot");
+
+dots.forEach((d,i)=>{
+if(i<code.length)d.classList.add("active");
+else d.classList.remove("active");
+});
+
+}
+
+function clearCode(){
+code="";
+updateDots();
+}
+
+function check(){
+
+if(code===pass){
+next(2);
+}
+else{
+alert("Wrong passcode ❤️");
+clearCode();
+}
+
+}
+
+function next(n){
+
+for(let i=1;i<=8;i++){
+document.getElementById("screen"+i).classList.add("hidden");
+}
+
+document.getElementById("screen"+n).classList.remove("hidden");
+
+}
+
+function blow(){
+
+document.getElementById("flame").style.display="none";
+setTimeout(()=>next(5),1000);
+
+}
+
+function showQuote(n){
+
+let q=document.getElementById("quote");
+
+if(n==1) q.innerHTML="You are my favorite person ❤️";
+if(n==2) q.innerHTML="Life is beautiful with you 💕";
+if(n==3) q.innerHTML="Every moment with you is special 🫂";
+
+}
+
+for(let i=0;i<30;i++){
+
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤";
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=4+Math.random()*4+"s";
+
+document.body.appendChild(heart);
+
+}
+
+</script>
+
+</body>
+</html>
